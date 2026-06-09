@@ -37,7 +37,8 @@ signupForm?.addEventListener("submit", (event) => {
   const data = new FormData(signupForm);
   const name = String(data.get("name") || "").trim();
   const email = String(data.get("email") || "").trim();
-  const device = String(data.get("device") || "").trim();
+  const children = String(data.get("children") || "").trim();
+  const devices = data.getAll("device").map((value) => String(value).trim()).filter(Boolean);
   const note = String(data.get("note") || "").trim();
   if (!email) return;
 
@@ -49,7 +50,8 @@ signupForm?.addEventListener("submit", (event) => {
     "",
     `Parent name: ${name || "-"}`,
     `Email: ${email}`,
-    `Child device environment: ${device || "-"}`,
+    `Children to register: ${children || "-"}`,
+    `Child device environment: ${devices.length ? devices.join(", ") : "-"}`,
     "",
     "What would make Angel useful for our family:",
     note || "-",
